@@ -1,0 +1,242 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset='utf-8'>
+        <meta name='viewport' content='width=device-width, initial-scale=1'>
+        <title>Lorne Station</title>
+
+        <link href='https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css' rel='stylesheet'>
+        {% load static %}
+        <link href="{% static 'styles.css' %}" rel="stylesheet">
+
+        <!-- general scripts -->
+        <script type='text/javascript' src=''></script>
+        <script type='text/javascript' src='https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js'></script>
+        <script type='text/javascript' src='https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js'></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <!-- <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script> -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <!-- my js -->
+        <script>
+          function InvalidEmail() {
+                alert("Your email is invalid try it again!");
+           }
+
+           function BookedOut() {
+                alert("This type of accommodation is booked out, please try different type!");
+           }
+
+           function BookingAccepted() {
+                    $("#add-booking").modal();
+                }
+
+        </script>
+
+    </head>
+
+
+    <body class='snippet-body'>
+
+    <!-- Modal for confirming booking-->
+<div class="modal fade" id="add-booking" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel" style="text-align: center;">finish booking</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div id="alert-box-add"></div>
+        <form action="{%url 'send_emails'%}" method="POST">
+            {% csrf_token %}
+             <div class="form-group">
+                 <div class="row">
+                     <h4 style="text-align:center">Your rooms is available</h4>
+                     <h4 style="text-align:center">Please confirm your booking</h4>
+                 </div>
+             </div>
+            <div class="row">
+                <div class="col text-center">
+            <button type="submit" class="btn btn-primary" id="submit-med">Confirm</button>
+                    </div>
+            </div>
+      </form>
+      </div>
+
+
+    </div>
+  </div>
+</div>
+</div>
+
+
+
+
+    <div id="booking" class="section">
+    <div class="section-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-7 col-md-push-5">
+                    <div class="booking-cta" style="margin-top: 20%;">
+                        <h1>Make your reservation</h1>
+                        <p> Enjoy a true outback experience at this quiet, scenic holiday retreat and have fun in Lightning Ridge !
+                        </p>
+                        <h2>
+                            {% if success %}
+                            <h1> booking was successfull </h1>
+                            {% endif %}
+
+                            {% if invalid_email %}
+                        <script>
+                          InvalidEmail();
+                        </script>
+                            {% endif %}
+
+                            {% if booked_out %}
+                        <script>
+                          BookedOut();
+                        </script>
+                            {% endif %}
+
+                                {% if booking_accepted %}
+                        <script>
+                          BookingAccepted();
+                        </script>
+                            {% endif %}
+                        </h2>
+                    </div>
+                </div>
+                <div class="col-md-5 col-md-pull-7">
+                    <div class="booking-form">
+                        <form action="{%url 'customer'%}" method="POST">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <span class="form-label">Your name</span>
+                                <input class="form-control" type="text" placeholder="Enter your name" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <span class="form-label">Your surname</span>
+                                <input class="form-control" type="text" placeholder="Enter your surname" name="surname" required>
+                            </div>
+                            <div class="form-group">
+                                <span class="form-label">Your phone number</span>
+                                <input class="form-control" type="text" placeholder="Enter your phone number" name="phone" required>
+                            </div>
+                            <div class="form-group">
+                                <span class="form-label">Your email</span>
+                                <input class="form-control" type="text" placeholder="Enter your phone number" name="email" required>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <span class="form-label">Check In</span>
+                                        <input class="form-control" type="date" name="date_from" required>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <span class="form-label">Check out</span>
+                                        <input class="form-control" type="date" name="date_to" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <span class="form-label">Accommodation</span>
+                                        <select class="form-control" name="accommodation" required>
+                                            <option disabled selected value> -- select an option -- </option>
+                                            <option>cabin</option>
+                                            <option>bunkhouse room</option>
+                                            <option>deluxe bunkhouse room</option>
+                                            <option>powered site</option>
+                                            <option>unpowered site</option>
+                                        </select>
+                                        <span class="select-arrow"></span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <span class="form-label">Number of rooms/sites</span>
+                                        <select class="form-control" name="no_rooms_sites">
+                                            <option>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                            <option>4</option>
+                                            <option>5</option>
+                                            <option>6</option>
+                                            <option>7</option>
+                                            <option>8</option>
+                                            <option>9</option>
+                                        </select>
+                                        <span class="select-arrow"></span>
+                                    </div>
+                                </div>
+                                 <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <span class="form-label">Adults</span>
+                                        <select class="form-control" name="adults">
+                                            <option>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                            <option>4</option>
+                                            <option>5</option>
+                                            <option>6</option>
+                                            <option>7</option>
+                                            <option>8</option>
+                                            <option>9</option>
+                                        </select>
+                                        <span class="select-arrow"></span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <span class="form-label">Children</span>
+                                        <select class="form-control" name="kids">
+                                            <option>0</option>
+                                            <option>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                            <option>4</option>
+                                            <option>5</option>
+                                            <option>6</option>
+                                            <option>7</option>
+                                            <option>8</option>
+                                            <option>9</option>
+                                        </select>
+                                        <span class="select-arrow"></span>
+                                    </div>
+                                </div>
+                            </div>
+                                <div class="row">
+                                <div class="col-sm-6">
+                            <div class="form-btn">
+                                <button class="submit-btn" type="submit">Check availability</button>
+                            </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                            <div class="form-btn">
+                                <a href="http://lornestation.com/"><button type="button" style="background-color: green;" class="submit-btn">Back to home page</button></a>
+                            </div>
+                                    </div>
+                                    </div>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type='text/javascript'></script>
+</body>
+</html>

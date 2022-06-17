@@ -34,7 +34,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'asyncemail',
+    'users',
 ]
 
 MIDDLEWARE = [
@@ -114,12 +114,12 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
-STATIC_ROOT = os.path.join(BASE_DIR, 'asyncemail/staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR, 'users/staticfiles')
 STATIC_URL = 'static/'
 
 # Extra lookup directories for collectstatic to find static files
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'asyncemail/static'),
+    os.path.join(BASE_DIR, 'users/static'),
 )
 
 # Default primary key field type
