@@ -1,2 +1,2 @@
-web: gunicorn booking.wsgi
-worker: celery -A booking worker -l info
+web: gunicorn async.wsgi
+worker: celery -A async worker -l info
