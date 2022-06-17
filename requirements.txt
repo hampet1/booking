@@ -33,4 +33,5 @@ vine==5.0.0
 virtualenv==20.14.1
 virtualenv-clone==0.5.7
 wcwidth==0.2.5
+whitenoise==6.2.0
 wrapt==1.14.1
