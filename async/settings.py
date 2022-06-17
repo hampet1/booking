@@ -133,6 +133,7 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = "hamrozipetr@outlook.com"
 EMAIL_HOST_PASSWORD = "Pumpkin1998"
 
-CELERY_BROKER_URL = 'redis://:p3997a30b852f912ea0e05446a9579ca3817fc4eab925fa0fbee0ff53b303a4ae@ec2-107-21-207-198.compute-1.amazonaws.com:28200'
+CELERY_BROKER_URL = 'rediss://:p3997a30b852f912ea0e05446a9579ca3817fc4eab925fa0fbee0ff53b303a4ae@ec2-107-21-207-198' \
+                    '.compute-1.amazonaws.com:28200 '
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
