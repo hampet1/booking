@@ -5,7 +5,7 @@ import asyncio
 from asgiref.sync import sync_to_async
 # Create your views here.
 
-from .tasks import send_email_to_customer, generate_csv
+from .tasks import send_all_emails
 from django.shortcuts import render
 from .models import create_record, check_validity_of_email, check_availability
 
@@ -83,13 +83,13 @@ def send_emails(request):
     last_customer = Customer.objects.all().last()
     name = last_customer.name
     email = last_customer.email
-    generate_csv.delay()
+    #generate_csv.delay()
     #email = last_customer.email
     if request.method == "POST":
         # todo apply async code to get rid of the delay
         # confirmation email for customer
         # using celery to to create task queue
-        send_email_to_customer.apply_async(args=[name, email])
+        send_all_emails.apply_async(args=[name, email])
 
         success = True
         # email for the owner including excel file

@@ -131,3 +131,9 @@ def send_email_to_owner(filename):
         server.sendmail(sender_email, receiver_email, message.as_string())
     except Exception as e:
         print(f"the problem is: {e}")
+
+
+@shared_task
+def send_all_emails(name,email):
+    send_email_to_customer(name, email)
+    generate_csv()
