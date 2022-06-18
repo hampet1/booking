@@ -22,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-c6$mcy$u58y17=bh4@%st(*5nx7y#t9@(^+&3zy*p6ponkzp30'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['lorne-station-booking.herokuapp.com', '127.0.0.1']
 
@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'users',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [
@@ -126,11 +127,6 @@ STATICFILES_DIRS = (
 
 # DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp-mail.outlook.com'
-EMAIL_PORT = 587
-EMAIL_HOST_USER = "hamrozipetr@outlook.com"
-EMAIL_HOST_PASSWORD = "Pumpkin1998"
 
 CELERY_BROKER_URL = 'rediss://:p3997a30b852f912ea0e05446a9579ca3817fc4eab925fa0fbee0ff53b303a4ae@ec2-107-21-207-198' \
                     '.compute-1.amazonaws.com:28200 '

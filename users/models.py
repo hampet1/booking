@@ -100,7 +100,7 @@ class Customer(models.Model):
     date_to = models.DateTimeField(null=True, blank=True)
     accommodation = models.CharField(null=True, blank=True, max_length=50)
     no_rooms_sites = models.IntegerField(default=1)
-    adults = models.IntegerField(default=0, null=True, blank=True)
+    adults = models.IntegerField(default=1, null=True, blank=True)
     kids = models.IntegerField(default=0, null=True, blank=True)
 
     def __str__(self):
